@@ -3,7 +3,7 @@
 [Show Demo](https://rooom-com.github.io/demos/minimap/)
 
 
-> [!info]
+> [!NOTE]
 > This demo mostly utilizes the [`setCameraOrientation`](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html#setcameraorientation) and [`getCameraOrientation`](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html#getcameraorientation) method of the API of rooomSpaces.
 > You can read more about it [here](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html).
 
@@ -79,12 +79,12 @@ That's it for the UI. Let's move on to the more exciting part of this tutorial -
 For the initialization of the SpaceViewer we need the Id of the Space and an iFrame element. Then we start the instance of the SpaceViewer with these parameters.
 
 
-> [!info]
+> [!NOTE]
 > There are many options to influence the startup behavior and appearance of the viewer. You can read more about them [here](https://developers.rooom.com/docs/rooom-spaces/viewer/customization.html).
 
 If the initialization is successful and the event ``viewer.start`` is triggered we can start all further logics within this function. 
 
-> [!info]
+> [!NOTE]
 > Which further events the viewer sends can be found [here](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/events.html).
 
 ```js
