@@ -1,11 +1,11 @@
 # Minimap
 
-[Show Demo](./index.html)
+[Show Demo](https://rooom-com.github.io/demos/minimap/)
 
-::: info
-This demo mostly utilizes the [`setCameraOrientation`](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html#setcameraorientation) and [`getCameraOrientation`](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html#getcameraorientation) method of the API of rooomSpaces.
-You can read more about it [here](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html).
-:::
+
+> [!info]
+> This demo mostly utilizes the [`setCameraOrientation`](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html#setcameraorientation) and [`getCameraOrientation`](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html#getcameraorientation) method of the API of rooomSpaces.
+> You can read more about it [here](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html).
 
 ## Goal
 For this we take the interior of an exhibition as an example and define interesting points (POIs) that can be navigated via a minimap in the upper right corner of the screen. The user clicks on icons in the minimap and the camera is animated to the respective coordinate in the space. The current camera position and orientation is also displayed as an icon and permanently updated.
@@ -78,15 +78,14 @@ That's it for the UI. Let's move on to the more exciting part of this tutorial -
 #### Initialization
 For the initialization of the SpaceViewer we need the Id of the Space and an iFrame element. Then we start the instance of the SpaceViewer with these parameters.
 
-::: info
-There are many options to influence the startup behavior and appearance of the viewer. You can read more about them [here](https://developers.rooom.com/docs/rooom-spaces/viewer/customization.html).
-:::
+
+> [!info]
+> There are many options to influence the startup behavior and appearance of the viewer. You can read more about them [here](https://developers.rooom.com/docs/rooom-spaces/viewer/customization.html).
 
 If the initialization is successful and the event ``viewer.start`` is triggered we can start all further logics within this function. 
 
-::: info
-Which further events the viewer sends can be found [here](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/events.html).
-:::
+> [!info]
+> Which further events the viewer sends can be found [here](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/events.html).
 
 ```js
 // script.js
