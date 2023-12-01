@@ -1,11 +1,10 @@
 # Coingame
 
-### [Show Demo](./index.html)
+### [Show Demo](https://rooom-com.github.io/demos/coingame/)
 
-::: info
-This demo mostly utilizes the [`show`](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html#setcameraorientation) and [`hide`](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html#getcameraorientation) method of the API of rooomSpaces.
-You can read more about it [here](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html).
-:::
+> [!NOTE]
+> This demo mostly utilizes the [`show`](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html#setcameraorientation) and [`hide`](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html#getcameraorientation) method of the API of rooomSpaces.
+> You can read more about it [here](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/camera.html).
 
 ## Goal
 In this game the user must find and click all the coins in the room. Every time a coin is clicked, the score is increased by one and the coin disappears. If the user has found all coins, the game is over and the user can start again.
@@ -68,15 +67,13 @@ That's it for the UI. Let's move on to the more exciting part of this tutorial -
 #### Initialization
 For the initialization of the SpaceViewer we need the Id of the Space and an iFrame element. Then we start the instance of the SpaceViewer with these parameters.
 
-::: info
-There are many options to influence the startup behavior and appearance of the viewer. You can read more about them [here](https://developers.rooom.com/docs/rooom-spaces/viewer/customization.html).
-:::
+> [!NOTE]
+> There are many options to influence the startup behavior and appearance of the viewer. You can read more about them [here](https://developers.rooom.com/docs/rooom-spaces/viewer/customization.html).
 
 If the initialization is successful and the event ``viewer.start`` is triggered we can start all further logics within this function. 
 
-::: info
-More viewer events can be found [here](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/events.html).
-:::
+> [!NOTE]
+> More viewer events can be found [here](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/events.html).
 
 ```js
 // script.js
@@ -112,10 +109,9 @@ api.on('click', (event) => {
 
 The event object contains the following properties: nodeId, screen- and world coordinates. The ``nodeId`` is the id of the clicked object. Thats what we are looking for.
 
-::: danger
-In order to make an object clickable, it must have an link attached to it. [Here](https://help.rooom.com/hc/en-us/articles/4468051345297-Web-links) you can read more about attaching links to objects. The link needs to be a magic string `/EXPO-X/`. This is a special link that is used to trigger the click event.
-In the future we will provide a more convenient way to make objects clickable.
-:::
+> [!WARNING]
+> In order to make an object clickable, it must have an link attached to it. [Here](https://help.rooom.com/hc/en-us/articles/4468051345297-Web-links) you can read more about attaching links to objects. The link needs to be a magic string `/EXPO-X/`. This is a special link that is used to trigger the click event.
+> In the future we will provide a more convenient way to make objects clickable.
 
 #### Hiding objects
 Now we know how to make objects clickable. But how can we hide them? We can do this with the [``hide``](https://developers.rooom.com/docs/rooom-spaces/viewer/viewer-api/objects.html#hide) function of the API. The first parameter is the id of the object we want to hide. The optional second parameter a callback function that is called when the object is hidden.
