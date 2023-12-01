@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Room Showcase</title>
+    <link rel="dns-prefetch" href="https://storage.rooom.com">
+    <script type="text/javascript" src="https://static.rooom.com/viewer-api/space-viewer-1.0.0.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <iframe src="" id="viewer" allow="autoplay; fullscreen; vr; xr" allowvr allowfullscreen mozallowfullscreen="true"
+        webkitallowfullscreen="true"></iframe>
+    <div id="shopping-cart-button-div" class="display-none"><img src="shopping_cart_icon_128753.svg"
+            class="inner-circle-svg" width="50%" style="padding-right: 6px;">
+        <div id="shopping-cart-content-count">0</div>
+    </div>
+    <div id="checkout-modal" class="display-none">
+        <div id="checkout-box">
+            <div id="checkout-box-content">
+                <h2>Basket</h2>
+                <div class="product-row display-none ring">
+                    <div class="product-info-row">
+                        <img src="Clipboard - 20. Juli 2022 15_41.png" alt="" class="product-image">
+                        <div>
+                            <h5>Ring</h5>
+                            <p>Silver Edition</p>
+                        </div>
+                    </div>
+                    <div class="display-flex-center">
+                        <p>$120.00</p>
+                        <img src="ricon-product-viewer_close.svg" class="delete-icon" id="delete-ring" height="26">
+                    </div>
+                </div>
+                <div class="product-row display-none necklace">
+                    <div class="product-info-row">
+                        <img src="Clipboard - 20. Juli 2022 15_40.png" alt="" class="product-image">
+                        <div>
+                            <h5>Necklace</h5>
+                            <p>Hexagon Vol. 1</p>
+                        </div>
+                    </div>
+                    <div class="display-flex-center">
+                        <p>$340.00</p>
+                        <img src="ricon-product-viewer_close.svg" class="delete-icon" id="delete-necklace" height="26">
+                    </div>
+                </div>
+                <div class="product-row display-none handbag">
+                    <div class="product-info-row">
+                        <img src="15_41.png" alt="" class="product-image">
+                        <div>
+                            <h5>Handbag</h5>
+                            <p>Gucci</p>
+                        </div>
+                    </div>
+                    <div class="display-flex-center">
+                        <p>$500.00</p>
+                        <img src="ricon-product-viewer_close.svg" class="delete-icon" id="delete-handbag" height="26">
+                    </div>
+                </div>
+                <hr>
+                <div id="price-row">
+                    <div>
+                        <h3>Total</h3>
+                    </div>
+                    <p>USD $<span id="price">0</span>.00</p>
+                </div>
+                <div>
+                    <h4>Express-Checkout</h4>
+                    <div id="paypal-button-container"></div>
+
+                    <div class="oval-checkout-boxes close-modal inverse">Continue Shopping</div>
+                    <div class="display-flex-center" style="gap: 20px">
+                        <img src="rooom_logo_mitR.png" alt="rooom logo" 
+                            height="18" style="margin-bottom: 20px;">
+                        </div>
+                </div>
+            </div>
+            <div id="checkout-close" class="close-modal">x</div>
+        </div>
+    </div>
+
+    <div class="add-to-cart display-flex-center display-none" id="ring"><img src="shopping_cart_icon_128753-white.svg"
+            height="17" style="margin-right: 5px;">Add to basket</div>
+    <div id="ring-description" class=" display-none description">
+        <h2>Ring</h2>
+        <p>Silver Edition</p>
+        <p>$120.00</p>
+    </div>
+    <div class="add-to-cart display-flex-center display-none" id="necklace"><img
+            src="shopping_cart_icon_128753-white.svg" height="17" style="margin-right: 5px;">Add to basket</div>
+    <div id="necklace-description" class=" display-none description">
+        <h2>Necklace</h2>
+        <p>Hexagon Vol. 1</p>
+        <p>$340.00</p>
+    </div>
+    <div class="add-to-cart display-flex-center display-none" id="handbag"><img
+            src="shopping_cart_icon_128753-white.svg" height="17" style="margin-right: 5px;">Add to basket</div>
+    <div id="handbag-description" class=" display-none description">
+        <h2>Handbag</h2>
+        <p>Gucci</p>
+        <p>$500.00</p>
+    </div>
+    <script src="script.js"></script>
+    <div id="smart-button-container">
+        <div style="text-align: center;">
+          <div id="paypal-button-container"></div>
+        </div>
+      </div>
+    <script src="https://www.paypal.com/sdk/js?client-id=AR-RmJq_zNerUH_dH4K9PFDmae78iiw2_oAlqjBItk6jiJXq_grV9mD4TZSShZ7tsCc8KIUEMkCKQTAa&enable-funding=venmo&currency=USD" data-sdk-integration-source="button-factory"></script>
+    <script>
+      function initPayPalButton() {
+        paypal.Buttons({
+          style: {
+            shape: 'pill',
+            color: 'gold',
+            layout: 'horizontal',
+            label: 'paypal',
+            
+          },
+  
+          createOrder: function(data, actions) {
+            var price = parseInt(document.getElementById("price").innerText);
+
+            return actions.order.create({
+              purchase_units: [{"amount":{"currency_code":"USD","value":price}}]
+            });
+          },
+  
+          onApprove: function(data, actions) {
+            return actions.order.capture().then(function(orderData) {
+              
+              // Full available details
+              console.log('Capture result', orderData, JSON.stringify(orderData, null, 2));
+  
+              // Show a success message within this page, e.g.
+              const element = document.getElementById('paypal-button-container');
+              element.innerHTML = '';
+              element.innerHTML = '<h3>Thank you for your payment!</h3>';
+              document.getElementById("shopping-cart-content-count").innerText = 0;
+              document.querySelectorAll(".product-row").forEach((element) => element.classList.add("display-none"));
+
+  
+              // Or go to another URL:  actions.redirect('thank_you.html');
+              
+            });
+          },
+  
+          onError: function(err) {
+            console.log(err);
+          }
+        }).render('#paypal-button-container');
+      }
+      initPayPalButton();
+    </script>
+</body>
+
+</html>
