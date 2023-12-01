@@ -109,7 +109,7 @@ api.on('click', (event) => {
 
 The event object contains the following properties: nodeId, screen- and world coordinates. The ``nodeId`` is the id of the clicked object. Thats what we are looking for.
 
-> [!WARNING]
+> [!CAUTION]
 > In order to make an object clickable, it must have an link attached to it. [Here](https://help.rooom.com/hc/en-us/articles/4468051345297-Web-links) you can read more about attaching links to objects. The link needs to be a magic string `/EXPO-X/`. This is a special link that is used to trigger the click event.
 > In the future we will provide a more convenient way to make objects clickable.
 
