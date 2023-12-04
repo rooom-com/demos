@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Screenshot</title>
+		<script src="https://static.rooom.com/viewer-api/product-viewer-1.0.0.min.js"></script>
+		<link rel="stylesheet" href="style.css" />
+	</head>
+	<body>
+		<iframe
+			style="width: 100%; height: 100%"
+			id="iframe"
+			src=""
+			allow="autoplay; fullscreen; vr; xr"
+			allowvr
+			allowfullscreen
+			mozallowfullscreen="true"
+			webkitallowfullscreen="true"
+		></iframe>
+
+		<button id="dialogButton">Open Dialog</button>
+
+		<dialog id="dialog">
+			<div>
+				<input id="width" type="number" placeholder="width" value="3840" />
+				<span>x</span>
+				<input id="height" type="number" placeholder="width" value="2160" />
+				<button id="screenshotButton">Take Screenshot</button>
+			</div>
+		</dialog>
+
+		<script src="script.js"></script>
+	</body>
+</html>
