@@ -224,7 +224,7 @@
                     if (variant.type === "color") {
                       style = "background-color: " + variant.data;
                     } else if (variant.type === "texture") {
-                      style = "background-image: url(" + variant.data + ")";
+                      style = "background-image: url(" + `"` + variant.data + `"` + ")";
                     }
                     element +=
                       '<button class="variant-option" id="' +
