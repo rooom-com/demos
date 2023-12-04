@@ -1,6 +1,6 @@
 # Scroller
 
-[Show Demo](https://rooom-com.github.io/demos/pc-builder/)
+[Show Demo](https://rooom-com.github.io/demos/scroller/)
 
 > [!NOTE]
 > In this tutorial we will use annotaion functions like[`selectAnnotation`]() and [`unselectAnnotation`]() of the API to animate the camera. But we are also using functions like [`setGroundColor`]() and [`setSkyColor`]() to change the overall color of the scene. Finally we are playing around with [`addTexture`]() and [`updateMaterialChannel`]() to change the texture of the product.
