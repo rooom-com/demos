@@ -10,7 +10,7 @@ If that is not enough you can also replace the ui completely with your own eleme
 
 ## Theming
 
-[Show example](./theming/index.html)
+[Show example](https://rooom-com.github.io/demos/custom-ui/theming/)
 
 [Playground](https://play.rooom.io)
 
@@ -70,7 +70,7 @@ If you want, you can try it yourself on the [Playground](https://play.rooom.io) 
 
 ## Replacing
 
-[Show example](./replacing/index.html)
+[Show example](https://rooom-com.github.io/demos/custom-ui/replacing/)
 
 [Playground](https://play.rooom.io)
 
