@@ -1,4 +1,4 @@
-# Kitchen Configurator 1
+# Kitchen Configurator 2
 
 [Show Demo](https://rooom-com.github.io/demos/kitchen-configurator-2/)
 
