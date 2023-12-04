@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rooom Halloween</title>
+    <link rel="dns-prefetch" href="https://storage.rooom.com" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      type="text/javascript"
+      src="https://static.rooom.com/viewer-api/space-viewer-1.0.0.min.js"
+    ></script>
+  </head>
+
+  <body>
+    <!-- spaceviewer -->
+    <iframe
+      src=""
+      id="viewer"
+      allow="autoplay; fullscreen; vr; xr"
+      allowvr
+      allowfullscreen
+      mozallowfullscreen="true"
+      webkitallowfullscreen="true"
+    ></iframe>
+
+    <!-- logo -->
+    <div id="counterbox" class="hidden">
+      You have found <span id="tips-found">0</span> out of
+      <span id="tips-all">0</span> Halloween Figures.
+    </div>
+
+    <!-- PDF Box -->
+    <div id="pdf-box" class="hidden">
+      <div class="close-screen-button">
+        <img src="assets/Close-white.svg" alt="schließen" class="copy-icon" />
+      </div>
+      <div id="pdf-box-inner">
+        <img src="assets/halloween.png" class="logo" />
+        <h2>
+          Congratulations! You have found all the hidden objects. <br />
+          Want to learn more on Enterprise Metaverse Solutions? Leave us a
+          message.
+        </h2>
+        <!-- <script charset="utf-8" type="text/javascript" src="js.hsforms.net/forms/embed/v2.js"></script> -->
+        <div id="contact-form-box">
+          <script
+            charset="utf-8"
+            type="text/javascript"
+            src="https://js.hsforms.net/forms/embed/v2.js"
+          ></script>
+          <script>
+            hbspt.forms.create({
+              region: "na1",
+              portalId: "7029104",
+              formId: "19ddcd13-9657-4c25-acec-31877b6245d0",
+            });
+          </script>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
