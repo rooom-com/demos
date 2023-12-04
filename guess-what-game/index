@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WBS Training</title>
+    <link rel="dns-prefetch" href="https://storage.rooom.com" />
+    <script
+      type="text/javascript"
+      src="https://static.rooom.com/viewer-api/product-viewer-1.0.0.min.js"
+    ></script>
+
+    <style>
+      @font-face {
+        font-family: "rooom";
+        src: url("rooom-space.eot");
+        src: url("rooom-space.svg");
+        src: url("rooom-space.woff");
+        src: url("rooom-space.ttf");
+      }
+
+      :root {
+        --primary-color: #000c18;
+        /* Magenta */
+        --secondary-color: #8dacbe;
+        --dark-grey: #4f5359;
+        --light-grey: #4f53594d;
+        --brown-grey: #b8b3a7;
+      }
+
+      html,
+      body {
+        position: relative;
+        font-family: "Mulish", sans-serif;
+        font-size: 10px;
+        font-weight: 500;
+        margin: 0;
+        color: #fff;
+        overflow: hidden;
+        display: flex;
+      }
+
+      #preview-image-container,
+      #preview,
+      #overlay,
+      body,
+      html,
+      iframe {
+        height: 100%;
+        width: 100%;
+        border: 0;
+        position: relative;
+      }
+
+      .position-absolute {
+        position: absolute;
+      }
+
+      .display-flex {
+        display: flex;
+      }
+
+      .menu.hidden,
+      .button-container.hidden,
+      .hidden {
+        display: none;
+        visibility: hidden;
+      }
+
+      .noselect {
+        -webkit-touch-callout: none;
+        /* iOS Safari */
+        -webkit-user-select: none;
+        /* Safari */
+        -ms-user-select: none;
+        /* Internet Explorer/Edge */
+        user-select: none;
+        /* Non-prefixed version, currently */
+      }
+
+      /* iframe */
+      #viewer {
+        width: 70%;
+        height: 100%;
+        border: 0;
+        /* display: none; */
+      }
+
+      #menu-div {
+        bottom: 0;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        height: 100%;
+        width: 30%;
+        gap: 10px;
+        position: relative;
+        background-color: #000c18;
+        display: flex;
+      }
+
+      #menu-div > h2 {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        flex: 1;
+        line-height: calc(100vh / 8);
+      }
+
+      #menu-div > div {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(10px, 1fr));
+        grid-template-rows: repeat(4, 1fr);
+        row-gap: 5%;
+        flex: 0 1 87.5%;
+        margin-bottom: 20px;
+      }
+
+      .menu-button {
+        width: 100%;
+        height: 100%;
+        border-radius: 1px;
+        display: flex;
+        justify-content: center;
+        background-position: center center;
+        background-size: contain;
+        background-repeat: no-repeat;
+      }
+
+      .menu-button:hover,
+      #solved-div button:hover {
+        filter: brightness(1.5);
+      }
+
+      .menu-button > img {
+        border-radius: 1px;
+      }
+
+      #points-div {
+        bottom: 60px;
+        right: 30%;
+        width: 70%;
+        padding: 20px 10px;
+        font-size: 2em;
+        text-align: center;
+        height: 52px;
+        display: flex;
+      }
+
+      #heading-div {
+        position: absolute;
+        margin: 40px auto;
+        text-align: center;
+        right: 30%;
+        width: 70%;
+      }
+
+      #blue-oval {
+        width: 50%;
+        border-radius: 26px;
+        margin: 0 auto;
+        position: relative;
+        background-color: #000c18;
+        display: flex;
+        padding: 6px;
+      }
+
+      #blue-oval span {
+        color: #fff;
+      }
+
+      #correct-div,
+      #wrong-div {
+        display: flex;
+        flex-direction: row;
+        width: 50%;
+        align-items: center;
+        gap: 10px;
+        text-transform: uppercase;
+      }
+
+      #wrong-div {
+        justify-content: flex-start;
+        color: #ff2f2f;
+      }
+
+      #correct-div {
+        justify-content: flex-end;
+        color: #00b2de;
+      }
+
+      #icon-div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        right: 30%;
+        width: 70%;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+
+      #solved-div {
+        width: 30%;
+        right: 45%;
+        padding: 30px;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--primary-color);
+      }
+
+      #solved-div button {
+        width: 60%;
+        height: 40px;
+        margin-top: 20px;
+        border-radius: 20px;
+        color: #fff;
+        background-color: #29303d;
+        border-color: #29303d;
+        border: none;
+        pointer-events: all;
+      }
+
+      #solved-div button:hover {
+        cursor: pointer;
+      }
+
+      #menu-button-1 {
+        background-image: url(assets/hardware-netzteil.png);
+      }
+
+      #menu-button-2 {
+        background-image: url(assets/hardware-mainboard.png);
+      }
+
+      #menu-button-3 {
+        background-image: url(assets/hardware-ram.png);
+      }
+
+      #menu-button-4 {
+        background-image: url(assets/hardware-cpu.png);
+      }
+
+      #menu-button-5 {
+        background-image: url(assets/hardware-festplatte.png);
+      }
+
+      #menu-button-6 {
+        background-image: url(assets/hardware-gpu.png);
+      }
+
+      #menu-button-7 {
+        background-image: url(assets/hardware-luefter.png);
+      }
+
+      #menu-button-x {
+        background-image: url(assets/hardware-netzwerk.png);
+      }
+    </style>
+  </head>
+
+  <body>
+    <iframe
+      src=""
+      id="viewer"
+      allow="autoplay; fullscreen; vr; xr"
+      allowvr
+      allowfullscreen
+      mozallowfullscreen="true"
+      webkitallowfullscreen="true"
+    ></iframe>
+    <div id="heading-div">
+      <h2 style="font-weight: normal">Aufgabe 3/10</h2>
+      <h1 style="font-size: 2.5em">
+        Setze die Bauteile in der richtigen Reihenfolge zusammen
+      </h1>
+    </div>
+    <div id="icon-div" class="position-absolute">
+      <img
+        src="assets/falsch-gross.png"
+        alt="Icon falsch"
+        class="hidden"
+        id="big-icon-wrong"
+      />
+      <img
+        src="assets/richtig-gross.png"
+        alt="Icon richtig"
+        class="hidden"
+        id="big-icon-correct"
+      />
+    </div>
+    <div id="solved-div" class="hidden position-absolute display-flex">
+      <h2>Sie haben Aufgabe 3/10 erfolgreich beendet</h2>
+      <button>Nächste Aufgabe</button>
+    </div>
+    <div id="points-div" class="hidden position-absolute">
+      <div id="blue-oval">
+        <div id="wrong-div">
+          <img src="assets/falsch-klein.png" alt="falsch" />
+          <p>Falsch:</p>
+          <span id="wrong-points">0</span>
+        </div>
+        <div id="correct-div">
+          <p>Richtig:</p>
+          <span id="correct-points">0</span>
+          <img src="assets/richtig-klein.png" alt="falsch" />
+        </div>
+      </div>
+    </div>
+    <div id="menu-div">
+      <h2>Wähle das passende Bauteil</h2>
+      <div>
+        <div class="menu-button" id="menu-button-2"></div>
+        <div class="menu-button" id="menu-button-4"></div>
+        <div class="menu-button" id="menu-button-3"></div>
+        <div class="menu-button" id="menu-button-1"></div>
+        <div class="menu-button" id="menu-button-x"></div>
+        <div class="menu-button" id="menu-button-6"></div>
+        <div class="menu-button" id="menu-button-7"></div>
+        <div class="menu-button" id="menu-button-5"></div>
+      </div>
+    </div>
+
+    <!-- Initialize the viewer -->
+    <script>
+      const id = "2d3f3b8c0ec144317151513f0e6aab";
+      window.onload = function () {
+        var iframe = document.getElementById("viewer"); // The iframe html element
+        var viewer = new ProductViewer(iframe);
+
+        const components = [
+          "Power_Supply",
+          "Motherboard",
+          "RAM",
+          "Hard_Drives",
+          "Graficscard",
+          "Vents",
+          "Side_glass",
+          "Disk_Drive",
+        ];
+        const highlights = [
+          "Power_Supply_placeholder",
+          "Motherboard_placeholder",
+          "RAM_placeholder",
+          "Hard_Drives_placeholder",
+          "Graficscard_placeholder",
+          "Vents_placeholder",
+          "Disk_Drive_placeholder",
+        ];
+
+        const menu_div = document.getElementById("menu-div");
+        const points_div = document.getElementById("points-div");
+        const solved_div = document.getElementById("solved-div");
+        const solved_div_button = document.querySelector("#solved-div button");
+        const correct_points_span = document.getElementById("correct-points");
+        const wrong_points_span = document.getElementById("wrong-points");
+        const icon_correct = document.getElementById("big-icon-correct");
+        const icon_wrong = document.getElementById("big-icon-wrong");
+
+        const menu_button_1 = document.getElementById("menu-button-1");
+        const menu_button_2 = document.getElementById("menu-button-2");
+        const menu_button_3 = document.getElementById("menu-button-3");
+        const menu_button_4 = document.getElementById("menu-button-4");
+        const menu_button_5 = document.getElementById("menu-button-5");
+        const menu_button_6 = document.getElementById("menu-button-6");
+        const menu_button_7 = document.getElementById("menu-button-7");
+        const menu_button_x = document.getElementById("menu-button-x");
+
+        var correct_points = 0;
+        var wrong_points = 0;
+        var step = 0;
+
+        viewer.init(id, {
+          onSuccess: function onSuccessFn(api) {
+            api.on("viewer.start", function () {
+              points_div.classList.remove("hidden");
+              components.forEach((component) => api.hide(component));
+              hideHighlightedObjects();
+              api.show("Power_Supply_placeholder");
+            });
+
+            menu_button_1.onclick = () => clickComponent(0);
+            menu_button_2.onclick = () => clickComponent(1);
+            menu_button_3.onclick = () => clickComponent(2);
+            menu_button_4.onclick = () => clickComponent(100);
+            menu_button_5.onclick = () => clickComponent(3);
+            menu_button_6.onclick = () => clickComponent(4);
+            menu_button_7.onclick = () => clickComponent(5);
+            menu_button_x.onclick = () => clickComponent(100);
+
+            solved_div_button.onclick = () =>
+              solved_div.classList.add("hidden");
+
+            function clickComponent(component) {
+              console.log(component);
+              if (component == step) {
+                correct_points++;
+                step++;
+                correct_points_span.innerText = correct_points;
+                if (step == 6) solved_div.classList.remove("hidden");
+                if (step == 4) api.show("Disk_Drive");
+                hideHighlightedObjects();
+                api.show(components[component]);
+                api.show(highlights[step]);
+                if (step == 3) api.show("Disk_Drive_placeholder");
+                showIcon(icon_correct);
+              } else {
+                wrong_points++;
+                wrong_points_span.innerText = wrong_points;
+                showIcon(icon_wrong);
+              }
+              iframe.focus();
+            }
+
+            function hideHighlightedObjects() {
+              highlights.forEach((highlight) => api.hide(highlight));
+            }
+            function showIcon(icon) {
+              icon.classList.remove("hidden");
+              setTimeout(() => icon.classList.add("hidden"), 1000);
+            }
+          },
+          onError: function onErrorFn() {},
+          autostart: 1,
+          camera_zoom_auto: 0,
+          camera_zoom_start: 15,
+        });
+      };
+    </script>
+  </body>
+</html>
