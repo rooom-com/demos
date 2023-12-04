@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Scroller</title>
+		<link rel="dns-prefetch" href="https://storage.rooom.com" />
+		<link rel="stylesheet" href="style.css" />
+		<script type="text/javascript" src="https://static.rooom.com/viewer-api/product-viewer-latest.min.js"></script>
+	</head>
+
+	<body>
+		<!-- Product Viewer -->
+		<iframe
+			id="iframe"
+			src=""
+			allow="autoplay; fullscreen; vr; xr"
+			allowvr
+			allowfullscreen
+			mozallowfullscreen="true"
+			webkitallowfullscreen="true"
+		>
+		</iframe>
+
+		<!-- Scroller with sections -->
+		<div id="container">
+			<div data-state="chapter1">Once upon a time...</div>
+			<div data-state="chapter2">there was a robot...</div>
+			<div data-state="chapter3">who lived...</div>
+			<div data-state="chapter4">happily ever after.</div>
+		</div>
+
+		<script src="script.js"></script>
+	</body>
+</html>
