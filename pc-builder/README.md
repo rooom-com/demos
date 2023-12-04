@@ -22,7 +22,7 @@ First at all we will create our base structure.
 In here the first thing we do is import the product-viewer script from rooom.
 We also import our stylesheet and javascript which we will define further on.
 
-```html{5,6,9}
+```html
 <!-- index.html -->
 <html>
 	<head>
@@ -143,7 +143,7 @@ After we have our base setup, we can now start by initializing our product viewe
 To tweak our viewer, we pass in some options to the init function.
 Note that all of our logic should now go inside the viewers `onSuccess` function.
 
-```js{10}
+```js
 const viewer = new ProductViewer(iframe);
 viewer.init(viewerID, {
 	autostart: true, // autostart the viewer
@@ -163,7 +163,7 @@ A detailed list of all initialization options can be found [here](https://develo
 
 Since we want to interact with our viewer once it is loaded, we also need to start our logic after the viewer has started rendering.
 
-```js{10-12}
+```js
 const viewer = new ProductViewer(iframe);
 viewer.init(viewerID, {
 	autostart: true, // autostart the viewer
