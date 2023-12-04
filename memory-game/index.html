@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Escape the Room</title>
+    <script
+      type="text/javascript"
+      src="https://static.rooom.com/viewer-api/space-viewer-1.0.0.min.js"
+    ></script>
+    <style>
+      iframe {
+        border: none;
+      }
+
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        scroll-behavior: smooth;
+        text-rendering: optimizeSpeed;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Insert an empty iframe -->
+    <iframe
+      src=""
+      id="viewer"
+      width="100%"
+      height="100%"
+      allow="autoplay; fullscreen; vr"
+      allowvr
+      allowfullscreen
+      mozallowfullscreen="true"
+      webkitallowfullscreen="true"
+    ></iframe>
+
+    <!-- Initialize the viewer -->
+    <script type="text/javascript">
+      var iframe = document.getElementById("viewer");
+      var id = "f3b296830bfc58c14fe5282e3ad030";
+
+      var viewer = new SpaceViewer(iframe);
+
+      viewer.init(id, {
+        onSuccess: function onSuccessFn(api) {
+          api.on("viewer.start", function () {
+            //Variablen deklaration
+            let selectedcards = [];
+            let active = 1;
+
+            // Definition Klasse Cards
+
+            class card {
+              constructor(value, ID) {
+                this._value = value;
+                this._ID = ID;
+                this._turned = false;
+              }
+
+              set turned(wert) {
+                this._turned = wert;
+              }
+
+              get value() {
+                return this._value;
+              }
+
+              get ID() {
+                return this._ID;
+              }
+
+              get turned() {
+                return this._turned;
+              }
+            }
+
+            // Definieren der einzelnen Karten
+            const M1 = new card(
+              "Buch",
+              "62b5733a97c8d37ff8770029-62c3043697c8d301666e422a",
+              false
+            );
+            const M2 = new card(
+              "Buch",
+              "62b5733a97c8d37ff8770029-62c302ba97c8d3019570cc94",
+              false
+            );
+            const M3 = new card(
+              "Uni",
+              "62b5733a97c8d37ff8770029-62c30a9697c8d3018f173f17",
+              false
+            );
+            const M4 = new card(
+              "Uni",
+              "62b5733a97c8d37ff8770029-62c30a2e97c8d301733906bf",
+              false
+            );
+            const M5 = new card(
+              "rooom",
+              "62b5733a97c8d37ff8770029-62c30a6b97c8d3017b16e8db",
+              false
+            );
+            const M6 = new card(
+              "rooom",
+              "62b5733a97c8d37ff8770029-62c3089897c8d301cf1a100b",
+              false
+            );
+            const M7 = new card(
+              "Saale",
+              "62b5733a97c8d37ff8770029-62c30abe97c8d301b20a1946",
+              false
+            );
+            const M8 = new card(
+              "Saale",
+              "62b5733a97c8d37ff8770029-62c306f497c8d3017d668eeb",
+              false
+            );
+            const M9 = new card(
+              "Mitte",
+              "62b5733a97c8d37ff8770029-62c305c297c8d3014a5367d4",
+              false
+            );
+            const M10 = new card(
+              "Mitte",
+              "62b5733a97c8d37ff8770029-62c3063697c8d30185600360",
+              false
+            );
+
+            const harr = [M1, M2, M3, M4, M5, M6, M7, M8, M9, M10];
+
+            // Definiere Var für 2. Game
+            let Taster = "62b5733a97c8d37ff8770029-62b9397a97c8d37fe052c6aa";
+            let lamparr = [
+              "62b5733a97c8d37ff8770029-62b9382a97c8d37fd45a65b5",
+              "62b5733a97c8d37ff8770029-62b9384d97c8d301521c5097",
+              "62b5733a97c8d37ff8770029-62b9384f97c8d37fdb209e95",
+              "62b5733a97c8d37ff8770029-62b9385097c8d37fc34a6d82",
+              "62b5733a97c8d37ff8770029-62b9385297c8d301534c0472",
+            ];
+            let lampresarr = [];
+            let color = "";
+
+            //==============================functions Memory Game========================//
+
+            // Bei initialisierung alle karten rotieren 62b5733a97c8d37ff8770029-62c3063697c8d30185600360 ul
+            harr.forEach((Karte) => {
+              api.rotate(
+                Karte.ID,
+                [270, 1, 0, 0],
+                { duration: 0.1 },
+                function () {
+                  console.log("Node has been rotated");
+                }
+              );
+            });
+
+            //Drehe Karte und Pruefe
+            function pruefe(card) {
+              if (card.turned === false && selectedcards.length < 2) {
+                card.turned = true;
+                api.rotate(
+                  card.ID,
+                  [90, 1, 0, 0],
+                  { duration: 1.0 },
+                  function () {
+                    console.log("Node has been rotated");
+                  }
+                );
+                selectedcards.push(card);
+
+                if (selectedcards.length === 2) {
+                  pruefeSieg();
+                }
+              }
+            }
+
+            //Pruefe Sieg
+            function pruefeSieg() {
+              if (selectedcards[0].value === selectedcards[1].value) {
+                selectedcards.forEach((Element) => {
+                  api.hide(Element.ID, function () {
+                    console.log("Hide" + Element.value);
+                  });
+                });
+                selectedcards = [];
+              } else {
+                selectedcards.forEach((Element) => {
+                  Element.turned = false;
+                  api.rotate(
+                    Element.ID,
+                    [270, 1, 0, 0],
+                    { duration: 1.0 },
+                    function () {
+                      console.log(Element.value + "has been rotated");
+                    }
+                  );
+                });
+                selectedcards = [];
+              }
+            }
+
+            //========================functions lampgame============================//
+            function shuffle() {
+              shuffleArray(lamparr);
+              lampresarr = [];
+            }
+
+            function shuffleArray(array) {
+              for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+              }
+            }
+
+            function startlamp() {
+              var stepSize = 2000;
+              lamparr.forEach((Element, i) => {
+                let factor = i + 1;
+                setTimeout(function () {
+                  api.setHighlight(
+                    Element,
+                    { enabled: true, alpha: 0.75, color: "#dcf500" },
+                    function () {
+                      console.log("Highlight set");
+                    }
+                  );
+                }, stepSize * factor - stepSize);
+                setTimeout(function () {
+                  api.setHighlight(
+                    Element,
+                    { enabled: false, alpha: 0.4, color: "#ff0000" },
+                    function () {
+                      console.log("Highlight set");
+                    }
+                  );
+                }, stepSize * factor);
+              });
+            }
+
+            function pruefeLamparr() {
+              if (lampresarr.length === 5) {
+                lamppruefe();
+                wl(color);
+              }
+            }
+
+            function lamppruefe() {
+              let x = 0;
+              for (let i = 0; i < lamparr.length; i++) {
+                if (lamparr[i] === lampresarr[i]) {
+                  x++;
+                } else {
+                  x = 0;
+                }
+              }
+              if (x === 5) {
+                color = "#00f500";
+              } else {
+                color = "#ff0000";
+              }
+            }
+
+            function wl(co) {
+              lamparr.forEach((Element) => {
+                api.setHighlight(
+                  Element,
+                  { enabled: true, alpha: 0.4, color: co },
+                  function () {
+                    console.log("Highlight set");
+                  }
+                );
+
+                setTimeout(function () {
+                  api.setHighlight(
+                    Element,
+                    { enabled: false, alpha: 0.4, color: "#ff0000" },
+                    function () {
+                      console.log("Highlight set");
+                    }
+                  );
+                }, 2000);
+              });
+            }
+
+            function onoff(ID) {
+              api.setHighlight(
+                ID,
+                { enabled: true, alpha: 0.75, color: "#dcf500" },
+                function () {
+                  console.log("Highlight set");
+                }
+              );
+            }
+
+            //On CLick Event mit auswahl der entsprechenden ID
+            api.on("click", function clickEvent(res) {
+              console.log(res.nodeId);
+              switch (res.nodeId) {
+                case M1.ID:
+                  pruefe(M1);
+                  break;
+                case M2.ID:
+                  pruefe(M2);
+                  break;
+                case M3.ID:
+                  pruefe(M3);
+                  break;
+                case M4.ID:
+                  pruefe(M4);
+                  break;
+                case M5.ID:
+                  pruefe(M5);
+                  break;
+                case M6.ID:
+                  pruefe(M6);
+                  break;
+                case M7.ID:
+                  pruefe(M7);
+                  break;
+                case M8.ID:
+                  pruefe(M8);
+                  break;
+                case M9.ID:
+                  pruefe(M9);
+                  break;
+                case M10.ID:
+                  pruefe(M10);
+                  break;
+                case Taster:
+                  shuffle(lamparr);
+                  startlamp();
+                  break;
+                case lamparr[0]:
+                  onoff(lamparr[0]);
+                  lampresarr.push(lamparr[0]);
+                  pruefeLamparr();
+                  break;
+                case lamparr[1]:
+                  onoff(lamparr[1]);
+                  lampresarr.push(lamparr[1]);
+                  pruefeLamparr();
+                  break;
+                case lamparr[2]:
+                  onoff(lamparr[2]);
+                  lampresarr.push(lamparr[2]);
+                  pruefeLamparr();
+                  break;
+                case lamparr[3]:
+                  onoff(lamparr[3]);
+                  lampresarr.push(lamparr[3]);
+                  pruefeLamparr();
+                  break;
+                case lamparr[4]:
+                  onoff(lamparr[4]);
+                  lampresarr.push(lamparr[4]);
+                  pruefeLamparr();
+                  break;
+              }
+            });
+          });
+        },
+        onError: function onErrorFn() {
+          console.log("Viewer error");
+        },
+      });
+    </script>
+  </body>
+</html>
